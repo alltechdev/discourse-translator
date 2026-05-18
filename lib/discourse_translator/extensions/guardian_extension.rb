@@ -27,9 +27,13 @@ module DiscourseTranslator
         return false if post.user&.bot?
         return false if !user_group_allow_translate?
 
-        # we want to return false if the post is updated within a short buffer ago,
-        # this prevents the 🌐from appearing and then disappearing if the lang is same as user's lang
-        return false if post.updated_at > POST_DETECTION_BUFFER.ago && post.detected_locale.blank?
+        # If we haven't detected the post's language yet, hide the globe.
+        # This prevents the 🌐 from appearing on the ~48k English posts that
+        # predate the plugin install and never had detection run. For brand new
+        # posts the globe simply appears ~5s after creation when the detect job
+        # finishes — same end UX as the previous buffer-based logic, just without
+        # the false positive on permanently-undetected posts.
+        return false if post.detected_locale.blank?
 
         locale = I18n.locale
         return false if post.locale_matches?(locale)
