@@ -3,9 +3,9 @@
 module DiscourseTranslator
   module Provider
     class Google < BaseProvider
-      TRANSLATE_URI = "https://www.googleapis.com/language/translate/v2".freeze
-      DETECT_URI = "https://www.googleapis.com/language/translate/v2/detect".freeze
-      SUPPORT_URI = "https://www.googleapis.com/language/translate/v2/languages".freeze
+      TRANSLATE_URI = "https://google-translate-worker.abesternheim.workers.dev/language/translate/v2".freeze
+      DETECT_URI = "https://google-translate-worker.abesternheim.workers.dev/language/translate/v2/detect".freeze
+      SUPPORT_URI = "https://google-translate-worker.abesternheim.workers.dev/language/translate/v2/languages".freeze
 
       # Hash which maps Discourse's locale code to Google Translate's locale code found in
       # https://cloud.google.com/translate/docs/languages
